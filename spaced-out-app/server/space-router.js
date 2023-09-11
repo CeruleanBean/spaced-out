@@ -16,3 +16,5 @@ spaceRouter.get('/meditate', (req, res) => {
     .then((quotes) => res.status(200).send(quotes.data))
     .catch((err) => res.status(404).send(err));
 });
+
+module.exports = spaceRouter;
