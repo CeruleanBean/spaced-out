@@ -79,7 +79,6 @@ function App() {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
             e.preventDefault();
-            // have to do this so new state doesn't point to same position in memory
             newQuotes = [];
             quotes.forEach(function (quote) {
               return newQuotes.push(quote);
@@ -88,9 +87,17 @@ function App() {
             return axios__WEBPACK_IMPORTED_MODULE_4__["default"].get('/quotes/meditate');
           case 5:
             quote = _context2.sent;
-            newQuotes.unshift(quote.data[0]);
+            newQuotes.unshift({
+              user: '',
+              quote: quote.data[0].q,
+              author: quote.data[0].a,
+              createdAt: new Date()
+            });
+            _context2.next = 9;
+            return axios__WEBPACK_IMPORTED_MODULE_4__["default"].post('/quotes/', newQuotes[0]);
+          case 9:
             setQuotes(newQuotes);
-          case 8:
+          case 10:
           case "end":
             return _context2.stop();
         }
@@ -130,10 +137,10 @@ function Quote(_ref) {
     className: "quote-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
       className: "quote-body",
-      children: quote.q
+      children: quote.quote
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
       className: "quote-author",
-      children: ["- ", quote.a]
+      children: ["- ", quote.author]
     })]
   });
 }
@@ -160,7 +167,6 @@ function Meditations(_ref) {
   var quotes = _ref.quotes;
   var createQuoteList = function createQuoteList() {
     var quoteList = quotes.map(function (quote, i) {
-      console.log(quotes);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Quote__WEBPACK_IMPORTED_MODULE_1__["default"], {
         quote: quote
       }, i);
