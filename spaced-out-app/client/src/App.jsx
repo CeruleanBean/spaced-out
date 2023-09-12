@@ -28,11 +28,18 @@ function App() {
 
   async function generateQuote (e) {
     e.preventDefault();
-    // have to do this so new state doesn't point to same position in memory
     let newQuotes = [];
-    quotes.forEach(quote => newQuotes.push(quote));
+    quotes.forEach(
+      quote => newQuotes.push(quote)
+    );
     const quote = await axios.get('/quotes/meditate');
-    newQuotes.unshift(quote.data[0]);
+    newQuotes.unshift({
+      user: '',
+      quote: quote.data[0].q,
+      author: quote.data[0].a,
+      createdAt: new Date()
+    });
+    await axios.post('/quotes/', newQuotes[0]);
     setQuotes(newQuotes);
   };
 

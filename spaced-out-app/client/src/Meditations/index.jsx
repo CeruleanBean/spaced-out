@@ -4,7 +4,6 @@ import Quote from './Quote';
 function Meditations ({quotes}) {
   let createQuoteList = () => {
     let quoteList = quotes.map((quote, i) => {
-      console.log(quotes);
       return (
         <Quote key={i} quote={quote} />
       )
