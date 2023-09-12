@@ -24,6 +24,14 @@ module.exports = {
       {
         test: /\.svg$/,
         use: 'svg-inline-loader'
+      },
+      {
+        test: /\.(gltf)$/,
+        loader: "gltf-url-loader"
+      },
+      {
+        test: /\.(bin)$/,
+        loader: 'file-loader'
       }
     ],
   },
