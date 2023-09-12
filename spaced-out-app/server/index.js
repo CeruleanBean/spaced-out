@@ -9,6 +9,11 @@ app.use(express.static(path.join(__dirname, "../client/build/public")));
 app.use(express.json());
 app.use("/quotes", spaceRouter);
 
+app.get('/model', (req, res) => {
+  console.log("MODEL");
+  res.send();
+})
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
